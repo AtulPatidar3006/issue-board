@@ -6,6 +6,17 @@ export const mockFetchIssues = () => {
     });
 };
 
+export const mockFetchIssueWithId = (id: string) => {
+     return new Promise(resolve => {
+        setTimeout(() => {
+            import('../data/issues.json').then(module => {
+                const issueData = module.default.filter((item) => item.id === id);
+                resolve(issueData.length === 0 ? null : issueData[0]);
+            });
+        }, 500);
+    });
+}
+
 export const mockUpdateIssue = (issueId: string, updates: any) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {

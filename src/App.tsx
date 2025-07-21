@@ -4,10 +4,12 @@ import { BoardPage } from './pages/BoardPage';
 import { IssueDetailPage } from './pages/IssueDetailPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { Navigation } from './components/Navigation';
+import { IssueContextProvider } from './utils/issueContext';
 
 export const App = () => {
 
   return (
+    <IssueContextProvider>
       <Router>
         <Navigation />
         <Routes>
@@ -17,5 +19,6 @@ export const App = () => {
           <Route path="*" element={<Navigate to="/board" />} />
         </Routes>
       </Router>
+    </IssueContextProvider>
   );
 }

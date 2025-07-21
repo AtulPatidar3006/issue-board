@@ -1,0 +1,41 @@
+.issue-detail-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.issue-detail-table {
+    height: 35vw;
+    width: 40vw;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 5px grey;
+    border: none;
+}
+
+.issue-field-value {
+    width: 65%;
+    text-align: center;
+}
+
+.resolved-button {
+    padding: 8px 15px;
+    border-radius: 25px;
+    border: none;
+    background-color: rgb(51, 51, 248);
+    height: 50px;
+    width: 180px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+.resolved-button:disabled{
+    cursor: not-allowed;
+    background-color: #ddd9d9;
+    color: #8b8888;
+}

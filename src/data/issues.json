@@ -28,5 +28,35 @@
     "createdAt": "2025-07-07T09:30:00Z",
     "assignee": "carol",
     "tags": ["ui"]
+  },
+  {
+    "id": "4",
+    "title": "Fix user timeout",
+    "status": "Backlog",
+    "priority": "low",
+    "severity": 1,
+    "createdAt": "2025-07-09T10:00:00Z",
+    "assignee": "Jason",
+    "tags": ["auth", "bug"]
+  },
+  {
+    "id": "5",
+    "title": "Add Caching",
+    "status": "In Progress",
+    "priority": "high",
+    "severity": 2,
+    "createdAt": "2025-07-08T12:00:00Z",
+    "assignee": "John",
+    "tags": ["performance"]
+  },
+  {
+    "id": "6",
+    "title": "Add light mode",
+    "status": "Done",
+    "priority": "medium",
+    "severity": 2,
+    "createdAt": "2025-07-07T09:30:00Z",
+    "assignee": "Megan",
+    "tags": ["ui"]
   }
 ]
