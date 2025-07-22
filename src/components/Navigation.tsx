@@ -5,7 +5,7 @@ import '../assets/styles/Navigation.css'
 
 export const Navigation = () => {
     const location = useLocation();
-    console.log(location);
+
     return (
         <nav className='navigation-container'>
             <Link to="/board" className={location.pathname === '/board' ? 'active-nav' : ''}>Board</Link>

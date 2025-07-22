@@ -15,8 +15,6 @@ export const IssueDetailPage = () => {
             setIssueDetail(issue.length === 0 ? null : issue[0]);
     }, [])
 
-    console.log(issueDetail);
-
     const issuePriorityClass = useMemo(() => {
         if (issueDetail === null) {
             return '';

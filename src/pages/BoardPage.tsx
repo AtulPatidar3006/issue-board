@@ -14,15 +14,24 @@ export const BoardPage = () => {
 
     // to fecth data from mock api
     useEffect(() => {
-        // avoid data fetch each time the boarpage loads
-        if (issueData.length === 0) {
+        const fetchData = async () => {
             mockFetchIssues().then((response) => {
                 setIssueData(response as Issue[]);
             }).catch((e) => {
                 console.log(e);
             })
         }
-    }, [issueData]);
+
+        // avoid data fetch each time the boarpage loads
+        if (issueData.length === 0) {
+            fetchData();
+        }
+
+        // CODE FOR POLLING - Commented as it was resetting the state for column change
+        // const intervalId = setInterval(fetchData, 10000);
+
+        // return () => clearInterval(intervalId);
+    }, []);
 
     useEffect(() => {
         const asssignees = issueData.map((eachIssue) => eachIssue.assignee);
