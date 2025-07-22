@@ -1,3 +1,6 @@
+import { State } from "./utils/issueReducer";
+import { Actions } from "./utils/issueActions";
+
 export type IssueStatus = 'Backlog' | 'In Progress' | 'Done';
 export type IssuePriority = 'low' | 'medium' | 'high';
 
@@ -15,11 +18,6 @@ export interface Issue {
 export type IssueContextType = {
     issueData: Issue[];
     setIssueData: React.Dispatch<React.SetStateAction<Issue[]>>;
-}
-
-export type searchSortFilter = {
-    search: string;
-    assignee: string;
-    severity: number;
-    sort: string;
+    state: State,
+    dispatch: React.Dispatch<Actions>
 }

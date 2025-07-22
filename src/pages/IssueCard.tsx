@@ -73,7 +73,7 @@ export const IssueCard: FC<CardProps> = ({ issue }) => {
             <div className='tags'>
                 {
                     issue.tags.map((tag) => (
-                        <span>{tag.toUpperCase()}</span>
+                        <span key={tag}>{tag.toUpperCase()}</span>
                     ))
                 }
             </div>
