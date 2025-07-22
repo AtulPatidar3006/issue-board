@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useReducer } from 'react';
 import './BoardPage.css';
 import { Container } from './Container';
+import { RecentlyVisited } from './RecentlyVisited';
 import { mockFetchIssues } from '../utils/api';
 import { Issue } from '../types';
 import { useIssueContext } from '../utils/issueContext';
@@ -103,20 +104,19 @@ export const BoardPage = () => {
                     <option value={3}>3</option>
                 </select>
 
-
                 <span className='input-label'>Sort By Priority:</span>
                 <br />
                 <input id='severity-high' type='radio' name='severity' value='high' checked={state.sort === 'high'} onChange={handlePriorityChange} />
                 <label htmlFor='severity-high' className='radio-label'>Highest</label>
 
-                <br />
                 <input id='severity-medium' type='radio' name='severity' value='low' checked={state.sort === 'low'} onChange={handlePriorityChange} />
                 <label htmlFor='severity-medium' className='radio-label'>Lowest</label>
-
 
                 <br />
                 <br />
                 <button className='reset-button' onClick={handleReset}>Reset</button>
+
+                <RecentlyVisited />
             </div>
             <div className='issue-board-container'>
                 <Container key='backlog-container' id='backlog' title='Backlog' issueList={issueData.filter((item) => item.status === 'Backlog')} />

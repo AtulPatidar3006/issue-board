@@ -41,6 +41,7 @@ export const IssueCard: FC<CardProps> = ({ issue }) => {
         return '';
     }, [issue.priority])
 
+    // function to update state after undo
     const handleUndo = () => {
         if (originalIssueforUndoRef.current) {
             const updatedIssueData = JSON.parse(JSON.stringify(issueData));
@@ -54,13 +55,31 @@ export const IssueCard: FC<CardProps> = ({ issue }) => {
         }
     }
 
-    const notify = () => toast(<div style={{width: '100%'}}>
+    // to show undo popup
+    const notify = () => toast(<div style={{ width: '100%' }}>
         <button className='undo-button' onClick={handleUndo}> Click here if you want to undo.</button>
     </div>);
 
     // handle click on issue card
     const handleIssueCardClick = () => {
-        navigate(`/issue/${issue.id}`)
+        navigate(`/issue/${issue.id}`);
+
+        try {
+            const currentDataInLocalStorage = localStorage.getItem('recentlyAccessed')
+            if (currentDataInLocalStorage === null) {
+                localStorage.setItem('recentlyAccessed', issue.id);
+            } else if (currentDataInLocalStorage.split(',').indexOf(issue.id) === -1) {
+                const currentValueArray = currentDataInLocalStorage.split(',');
+                currentValueArray.unshift(issue.id);
+                if (currentValueArray.length > 5) {
+                    localStorage.setItem('recentlyAccessed', currentValueArray.slice(0, 5).join());
+                } else {
+                    localStorage.setItem('recentlyAccessed', currentValueArray.join());
+                }
+            }
+        } catch (error) {
+            localStorage.setItem('recentlyAccessed', '');
+        }
     }
 
     // function to move issue to right column
@@ -111,10 +130,6 @@ export const IssueCard: FC<CardProps> = ({ issue }) => {
                         <td>:</td>
                         <td>{issue.title}</td>
                     </tr>
-                    {/* <tr>
-                        <td className='issue-field'>Status</td>
-                        <td>{issue.status}</td>
-                    </tr> */}
                     <tr>
                         <td className='issue-field'>Priority</td>
                         <td>:</td>
