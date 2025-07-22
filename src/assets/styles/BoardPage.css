@@ -8,7 +8,6 @@
     width: 80vw;
     min-height: 43vw;
     height: auto;
-    margin: auto;
     display: flex;
     gap: 20px;
 }
@@ -24,13 +23,17 @@
     font-size: 14px;
     font-weight: bold;
 }
-
+.toolbar-container{
+    padding: 15px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 15px;
+}
 #search-input {
     height: 40px;
     width: 92%;
     border: 1px solid;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     outline: none;
     padding: 0px 8px;
 }
@@ -41,7 +44,7 @@
     width: 100%;
     border: 1px solid;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     outline: none;
     padding: 5px 8px;
 }
@@ -66,7 +69,7 @@
 
 /* Container CSS */
 .container {
-    width: 20vw;
+    width: 30%;
     min-height: 40vw;
     border: none;
     border-radius: 15px;
@@ -94,21 +97,6 @@
     border-radius: 15px;
     background-color: #ffffff;
 }
-
-/* .backlog:hover {
-    box-shadow: 0px 0px 6px 1px rgb(60, 60, 247);
-    border: 0px;
-}
-
-.inprogress:hover {
-    box-shadow: 0px 0px 6px 1px rgb(60, 60, 247);
-    border: 0px;
-}
-
-.done:hover {
-    box-shadow: 0px 0px 6px 1px rgb(60, 60, 247);
-    border: 0px;
-} */
 .issue-detials-table {
     width: 100%;
     background-color: aliceblue;

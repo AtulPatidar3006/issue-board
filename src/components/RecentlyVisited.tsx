@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './RecentlyVisited.css';
+import '../assets/styles/RecentlyVisited.css';
 import { Issue } from '../types';
 import { useNavigate } from 'react-router-dom';
 import { useIssueContext } from '../utils/issueContext';
@@ -17,7 +17,7 @@ export const RecentlyVisited = () => {
             const issueDataForRecetlyVisited = issueData.filter((eachIssue) => localDataArray?.indexOf(eachIssue.id) !== -1);
             setDataToDisplay(issueDataForRecetlyVisited);
         }
-    }, [dataFromLocalStorage])
+    }, [dataFromLocalStorage, issueData])
 
     if (dataFromLocalStorage === null) {
         return null;

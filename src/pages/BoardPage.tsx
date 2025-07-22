@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import './BoardPage.css';
-import { Container } from './Container';
-import { RecentlyVisited } from './RecentlyVisited';
+import React, { useEffect, useState } from 'react';
+import '../assets/styles/BoardPage.css';
+import { Container } from '../components/Container';
+import { RecentlyVisited } from '../components/RecentlyVisited';
 import { mockFetchIssues } from '../utils/api';
 import { Issue } from '../types';
 import { useIssueContext } from '../utils/issueContext';
@@ -30,30 +30,24 @@ export const BoardPage = () => {
     }, [issueData]);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.value !== '') {
-            dispatch({
-                type: ActionTypes.SET_SEARCH_VALUE,
-                payload: event.target.value,
-            })
-        }
+        dispatch({
+            type: ActionTypes.SET_SEARCH_VALUE,
+            payload: event.target.value,
+        })
     }
 
     const handleAssigneeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        if (event.target.value !== '') {
-            dispatch({
-                type: ActionTypes.SET_ASSIGNEE_VALUE,
-                payload: event.target.value,
-            })
-        }
+        dispatch({
+            type: ActionTypes.SET_ASSIGNEE_VALUE,
+            payload: event.target.value,
+        })
     }
 
     const handleSeverityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        if (event.target.value !== '') {
-            dispatch({
-                type: ActionTypes.SET_SEVERITY_VALUE,
-                payload: parseInt(event.target.value),
-            })
-        }
+        dispatch({
+            type: ActionTypes.SET_SEVERITY_VALUE,
+            payload: parseInt(event.target.value),
+        })
     }
 
     const handlePriorityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,44 +72,45 @@ export const BoardPage = () => {
     return (
         <div className='board-page-container'>
             <div className='left-toolbar'>
-                <label htmlFor='search-input' className='input-label'>Search:</label>
-                <br></br>
-                <input id='search-input' type='text' placeholder='Enter to search...' value={state.search} onChange={handleSearchChange}></input>
+                <div className='toolbar-container'>
+                    <label htmlFor='search-input' className='input-label'>Search:</label>
+                    <br></br>
+                    <input id='search-input' type='text' placeholder='Enter to search...' value={state.search} onChange={handleSearchChange}></input>
 
-                <br />
-                <label htmlFor='filter-asssignee' className='input-label'>Assignee:</label>
-                <br></br>
-                <select id='filter-asssignee' value={state.assignee} onChange={handleAssigneeChange}>
-                    <option value=''>Select Assignee...</option>
-                    {
-                        assigneeData.map((eachAssignee: string) =>
-                            <option key={eachAssignee} value={eachAssignee}>{eachAssignee}</option>
-                        )
-                    }
-                </select>
+                    <br />
+                    <label htmlFor='filter-asssignee' className='input-label'>Assignee:</label>
+                    <br></br>
+                    <select id='filter-asssignee' value={state.assignee} onChange={handleAssigneeChange}>
+                        <option value=''>Select Assignee...</option>
+                        {
+                            assigneeData.map((eachAssignee: string) =>
+                                <option key={eachAssignee} value={eachAssignee}>{eachAssignee}</option>
+                            )
+                        }
+                    </select>
 
-                <br />
-                <label htmlFor='filter-severity' className='input-label'>Severity:</label>
-                <br></br>
-                <select id='filter-severity' value={state.severity} onChange={handleSeverityChange}>
-                    <option value={0}>Select Severity...</option>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                </select>
+                    <br />
+                    <label htmlFor='filter-severity' className='input-label'>Severity:</label>
+                    <br></br>
+                    <select id='filter-severity' value={state.severity} onChange={handleSeverityChange}>
+                        <option value={0}>Select Severity...</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                    </select>
 
-                <span className='input-label'>Sort By Priority:</span>
-                <br />
-                <input id='severity-high' type='radio' name='severity' value='high' checked={state.sort === 'high'} onChange={handlePriorityChange} />
-                <label htmlFor='severity-high' className='radio-label'>Highest</label>
+                    <span className='input-label'>Sort By Priority:</span>
+                    <br />
+                    <input id='severity-high' type='radio' name='severity' value='high' checked={state.sort === 'high'} onChange={handlePriorityChange} />
+                    <label htmlFor='severity-high' className='radio-label'>Highest</label>
 
-                <input id='severity-medium' type='radio' name='severity' value='low' checked={state.sort === 'low'} onChange={handlePriorityChange} />
-                <label htmlFor='severity-medium' className='radio-label'>Lowest</label>
+                    <input id='severity-medium' type='radio' name='severity' value='low' checked={state.sort === 'low'} onChange={handlePriorityChange} />
+                    <label htmlFor='severity-medium' className='radio-label'>Lowest</label>
 
-                <br />
-                <br />
-                <button className='reset-button' onClick={handleReset}>Reset</button>
-
+                    <br />
+                    <br />
+                    <button className='reset-button' onClick={handleReset}>Reset</button>
+                </div>
                 <RecentlyVisited />
             </div>
             <div className='issue-board-container'>

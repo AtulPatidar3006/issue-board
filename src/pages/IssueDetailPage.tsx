@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { mockFetchIssueWithId, mockUpdateIssue } from '../utils/api';
+import { mockUpdateIssue } from '../utils/api';
 import { Issue } from '../types';
 import { useIssueContext } from '../utils/issueContext';
-import './IssueDetailsPage.css';
+import '../assets/styles/IssueDetailsPage.css';
 
 export const IssueDetailPage = () => {
     const { id } = useParams();
@@ -16,22 +16,6 @@ export const IssueDetailPage = () => {
     }, [])
 
     console.log(issueDetail);
-
-    const issueColumnClass = useMemo(() => {
-        if (issueDetail === null) {
-            return '';
-        }
-        if (issueDetail.status === 'Backlog') {
-            return 'backlog';
-        }
-        if (issueDetail.status === 'In Progress') {
-            return 'inprogress';
-        }
-        if (issueDetail.status === 'Done') {
-            return 'done';
-        }
-        return '';
-    }, [issueDetail])
 
     const issuePriorityClass = useMemo(() => {
         if (issueDetail === null) {
