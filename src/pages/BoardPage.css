@@ -45,12 +45,14 @@
     outline: none;
     padding: 5px 8px;
 }
-.radio-label{
+
+.radio-label {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     line-height: 18px;
 }
-.reset-button{
+
+.reset-button {
     border: 1px solid black;
     height: 45px;
     width: 70px;
@@ -61,6 +63,7 @@
     cursor: pointer;
     background-color: rgb(238, 238, 238);
 }
+
 /* Container CSS */
 .container {
     width: 20vw;
@@ -175,4 +178,15 @@
 .priority-low {
     color: #00FF00;
     font-weight: bold;
+}
+
+.undo-button {
+    border: none;
+    background-color: blue;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 97%;
+    color: white;
 }

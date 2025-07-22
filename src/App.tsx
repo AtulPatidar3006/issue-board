@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { BoardPage } from './pages/BoardPage';
 import { IssueDetailPage } from './pages/IssueDetailPage';
 import { SettingsPage } from './pages/SettingsPage';
@@ -19,6 +20,12 @@ export const App = () => {
           <Route path="*" element={<Navigate to="/board" />} />
         </Routes>
       </Router>
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        pauseOnHover={false}
+        closeOnClick
+      />
     </IssueContextProvider>
   );
 }

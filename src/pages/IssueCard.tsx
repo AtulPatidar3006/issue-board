@@ -1,7 +1,8 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useRef } from 'react';
 import { Issue } from '../types';
 import { useNavigate } from 'react-router-dom';
 import { useIssueContext } from '../utils/issueContext';
+import { toast } from 'react-toastify';
 
 interface CardProps {
     issue: Issue,
@@ -10,6 +11,8 @@ interface CardProps {
 export const IssueCard: FC<CardProps> = ({ issue }) => {
     const navigate = useNavigate();
     const { issueData, setIssueData } = useIssueContext();
+
+    const originalIssueforUndoRef = useRef<Issue | null>(null);
 
     // to set card style based on column
     const issueColumnClass = useMemo(() => {
@@ -38,34 +41,58 @@ export const IssueCard: FC<CardProps> = ({ issue }) => {
         return '';
     }, [issue.priority])
 
+    const handleUndo = () => {
+        if (originalIssueforUndoRef.current) {
+            const updatedIssueData = JSON.parse(JSON.stringify(issueData));
+            updatedIssueData.forEach((eachItem: Issue) => {
+                if (originalIssueforUndoRef.current !== null && eachItem.id === originalIssueforUndoRef.current.id) {
+                    eachItem.status = originalIssueforUndoRef.current.status;
+                    originalIssueforUndoRef.current = null;
+                }
+            });
+            setIssueData(updatedIssueData);
+        }
+    }
+
+    const notify = () => toast(<div style={{width: '100%'}}>
+        <button className='undo-button' onClick={handleUndo}> Click here if you want to undo.</button>
+    </div>);
+
+    // handle click on issue card
     const handleIssueCardClick = () => {
         navigate(`/issue/${issue.id}`)
     }
 
+    // function to move issue to right column
     const handleMoveRight = () => {
         // to create a copy of original state
         const updatedIssueData = JSON.parse(JSON.stringify(issueData));
         updatedIssueData.forEach((eachItem: Issue) => {
             if (eachItem.id === issue.id) {
+                originalIssueforUndoRef.current = { ...eachItem };
                 eachItem.status = eachItem.status === 'Backlog' ? 'In Progress' : 'Done';
             }
-        })
+        });
+        notify();
         setTimeout(() => {
             setIssueData(updatedIssueData);
-        }, 500)
+        }, 500);
     }
 
+    // function to move issue to left column
     const handleMoveLeft = () => {
         // to create a copy of original state
         const updatedIssueData = JSON.parse(JSON.stringify(issueData));
         updatedIssueData.forEach((eachItem: Issue) => {
             if (eachItem.id === issue.id) {
+                originalIssueforUndoRef.current = { ...eachItem };
                 eachItem.status = eachItem.status === 'Done' ? 'In Progress' : 'Backlog';
             }
-        })
+        });
+        notify();
         setTimeout(() => {
             setIssueData(updatedIssueData);
-        }, 500)
+        }, 500);
     }
 
     return (
